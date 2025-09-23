@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Photo Sorter{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    {% block header %}
+    <h1>
+       📸 Photo Sorter App
+    </h1>
+    {% endblock %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <script>
+      // Hide flash messages after 5 seconds
+      window.addEventListener('DOMContentLoaded', (event) => {
+        const flashes = document.querySelectorAll('.flash');
+        flashes.forEach(flash => {
+          setTimeout(() => {
+            flash.style.transition = 'opacity 3s ease-out';
+            flash.style.opacity = '0';
+            setTimeout(() => flash.remove(), 500); // remove from DOM after fade
+          }, 5000); // 5000ms = 5 seconds
+        });
+      });
+    </script>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,350 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: lightslategrey;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    font-size: 4rem;
+    color: black;
+    -webkit-text-stroke: 1px white;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /*background-color: white;*/
+    border-radius: 30px;
+}
+
+h2 {
+    font-size: 3rem;
+    color: white;
+    -webkit-text-stroke: 2px black;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+    padding: 5px;
+    background-color: lightseagreen;
+    border-radius: 15px;
+}
+
+h3 {
+    font-size: 2rem;
+    color: black;
+    text-align: left;
+    font-weight: bold;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+.flash-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.flash {
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 5px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: lightseagreen;
+    border: 1px solid #c3e6cb;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: white;
+    color: darkred;
+    padding: 10px 15px;
+    font-weight: bold;
+    border: 1px solid orangered;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    padding: 10px;
+    z-index: 1;
+    border-radius: 6px;
+}
+
+.dropdown-content .category-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.categories-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;  /* space between dropdown and form */
+    margin-bottom: 20px;
+}
+
+.add-category-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.button {
+    display: inline-block;
+    background-color: white;
+    color: indianred;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+}
+
+.button:hover {
+    background-color: lightgrey;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.profile-button {
+    display: inline-block;
+    background-color: indianred;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-decoration: none;
+      border-radius: 4px;
+}
+
+.profile-button:hover {
+    background-color: darkred;
+}
+
+.back-button {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: lightgrey;
+}
+
+.button-small {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+}
+
+.button-container-1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.button-container-1 form {
+    display: inline-block;
+    margin: 0;
+}
+
+.button-container-2 {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+}
+
+.delete-button {
+    background-color: indianred;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+.categories-list {
+    list-style: none;
+    padding: 0;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;  /* space between input and buttons */
+    margin-bottom: 5px;
+}
+
+.user-list li strong {
+    font-size: 2rem;
+    color: black;
+    text-shadow: 1px 1px 2px indianred;
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.user-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+.user-name {
+    font-size: 1.8rem;
+    color: darkorange;
+    font-weight: bold;
+}
+
+.user-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.container li {
+    list-style: none;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    padding: 15px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 250px;
+    box-sizing: border-box;
+}
+
+.container ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.photo-container {
+    display: flex;
+    flex-wrap: wrap;       /* allow multiple rows */
+    gap: 10px;
+    justify-content: center;
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 4 columns max if space allows */
+    gap: 10px;
+    justify-items: center;
+    align-items: end;
+    width: 100%;
+}
+
+.photo {
+    flex: 1 1 200px;       /* grow/shrink, base width 200px */
+    max-width: 220px;      /* optional max width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+.photo img {
+    max-width: 250px;   /* landscape photos never wider than this */
+    max-height: 250px;  /* portrait photos never taller than this */
+    height: auto;       /* keep aspect ratio */
+    width: auto;        /* keep aspect ratio */
+    object-fit: contain;
+    display: block;
+}
+
+.description {
+    font-family: "Comic Sans MS", emoji;
+    font-size: large;
+    color: #721c24;
+    /*-webkit-text-stroke: 1px white;*/
+}
+
+.photo-name {
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 8px;
+    text-align: center;         /* center everything */
+}
+
+.category-name {
+    border: none;
+    display: inline-block;
+    /*align-items: center;*/
+    vertical-align: middle;
+    /*justify-content: flex-start;*/
+    text-align: center;
+    white-space: nowrap;
+    padding: 0;              /* remove extra space */
+    margin: 0;
+    border-radius: 4px;
+}

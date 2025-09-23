@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Dashboard - {{ current_user.username }}
+{% endblock %}
+
+{% block header %}
+<h1>{{ current_user.username }}'s Photo Sorter</h1><br>
+{% endblock %}
+
+{% block content %}
+
+            <!-- User Actions -->
+            <div class="profile-container">
+                <a href="{{ url_for('user.profile') }}">
+                    <button type="button" class="profile-button">Profile</button>
+                </a>
+            </div>
+
+
+         <!-- Categories Section -->
+        <section class="categories-section">
+            <div class="categories-header">
+            {% if categories %}
+            <div class="dropdown">
+                <button class="dropbtn button" id="categories-toggle">Categories ▼</button>
+                <div class="dropdown-content" id="categories-menu">
+                {% for category in categories %}
+                    <div class="category-item">
+                        <form action="{{ url_for('categories.update_category', category_id=category.id) }}" method="POST" style="display:inline">
+                            <input type="text" name="name" value="{{ category.name }}" placeholder="Rename category">
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="{{ url_for('categories.delete_category', category_id=category.id) }}" method="POST" style="display:inline"
+                              onsubmit="return confirm('Are you sure you want to delete category: {{ category.name }}?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% else %}
+                <p>You have no categories yet. Add some here:</p>
+            {% endif %}
+
+                <form action="{{ url_for('categories.add_category') }}" method="POST" class="add-category-form">
+                    <input type="text" name="name" placeholder="Category name" required>
+                    <button type="submit">Add Category</button>
+                </form>
+
+                <form action="{{ url_for('photos.search_photos') }}" method="get" class="search-bar">
+                    <input type="text" name="q" placeholder="Search photos..." value="{{ search_query or '' }}">
+                    <button type="submit">Search</button>
+                </form>
+
+                <form action="{{ url_for('photos.sort_photos') }}" method="POST">
+                    <button type="submit" class="button">Sort Photos</button>
+                </form>
+
+            </div>
+        </section>
+
+
+<script>
+    const toggleButton = document.getElementById("categories-toggle");
+    const menu = document.getElementById("categories-menu");
+
+    toggleButton.addEventListener("click", () => {
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    });
+
+    // Optional: Close dropdown if clicking outside
+    document.addEventListener("click", (e) => {
+        if (!toggleButton.contains(e.target) && !menu.contains(e.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script><br>
+
+        <div class="container">
+            <h2>Your Photos</h2>
+        </div>
+        <!-- Photos Section -->
+        <section class="photo-container">
+
+            {% if photos_by_category %}
+            {% for category_name, photos_list in photos_by_category.items() %}
+                {% if photos_list %}
+                    <h3>{{ category_name }}</h3>
+                    <div class="photos-grid">
+                        {% for photo in photos_list %}
+                            <div class="photo">
+                                {% set photo_path = 'uploads/' ~ photo.unique_filename %}
+
+                                {% if photo.description %}
+                                    <p class="description">"{{ photo.description }}"</p>
+                                {% endif %}
+
+                                <img class="photo-img"
+                                     src="{{ url_for('static', filename=photo_path) }}"
+                                     alt="{{ photo.original_filename }}"
+                                     width="200"
+                                     onerror="this.onerror=null; this.replaceWith(document.createTextNode('[Missing file: {{ photo.original_filename }}]'));">
+
+                                {% if photo.categories %}
+                                <form method="POST" action="{{ url_for('photos.update_photo', photo_id=photo.id) }}">
+                                  <!-- Display original filename to user but still keep the unique filename in backend -->
+                                    <input type="text" name="original_filename" value="{{ photo.original_filename }}" class="photo-name">
+
+                                    <select name="category_id" class="category-select">
+                                        {% for cat in categories %}
+                                            <option value="{{ cat.id }}" {% if photo.categories and photo.categories[0].id == cat.id %}selected{% endif %}>
+                                                {{ cat.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+<!--                                <input type="text" name="category_name" value="{{ category_name }}" class="category-name"></input>-->
+                                    <button type="submit" class="button">Update</button>
+                                </form><br>
+
+                                {% else %}
+                                <form method="POST" action="{{ url_for('photos.sort_single_photo', photo_id=photo.id) }}">
+                                    <!-- Optional user-assigned category -->
+                                    <select name="category_id" class="category-select">
+                                        <option value="">-- Choose category (optional) --</option>
+                                        {% for cat in categories %}
+                                            <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <button type="submit" class="button">Sort Photo</button>
+                                </form>
+                                {% endif %}
+
+                                <!-- Photo actions -->
+                                <form action="{{ url_for('photos.delete_photo', photo_id=photo.id) }}" method="POST" style="display:inline"
+                                      onsubmit="return confirm('Are you sure you want to delete {{ photo.unique_filename }}?');">
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+    <!--            </div>-->
+        </section>
+
+        {% else %}
+            <p>You have no photos yet. Add some below:</p>
+        {% endif %}
+        <br><br><br><br>
+        <section class="photo-upload">
+            <form action="{{ url_for('photos.upload_photos') }}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="photos" multiple required>
+                <button type="submit">Upload Photos</button>
+            </form>
+        </section>
+
+        </div>
+
+{% endblock %}

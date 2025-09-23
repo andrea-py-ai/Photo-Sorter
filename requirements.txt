@@ -1,0 +1,9 @@
+Flask
+Flask-Login
+Flask-SQLALchemy
+SQLAlchemy
+python-dotenv
+requests
+openai
+Pillow
+Werkzeug

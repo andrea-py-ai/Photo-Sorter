@@ -1,0 +1,8 @@
+*.idea/
+*.venv/
+*.env
+*project_plan/
+__pycache__
+.DS_Store
+packages/data/photos.db
+static/uploads/
