@@ -35,9 +35,9 @@ photo_sorter/
     │  ├─ openai_service.py      # OpenAI sorting logic  
     │  └── photo_service.py      # photo-specific utilities (resize, file path, etc.)  
     ├── routes/         # Flask Blueprints  
-    │  ├─ auth.py           # login, logout  
-    │  ├─ photos.py         # upload, list, update, delete  
-    │  ├─ user.py           # signup, update, delete  
+    │  ├─ auth.py           # signup, login, logout  
+    │  ├─ photos.py         # dashboard, upload, list, sort, update, delete, search  
+    │  ├─ user.py           # profile, update, delete  
     │  └── categories.py     # add, list, update, delete   
     └── data/           # Local storage  
  
