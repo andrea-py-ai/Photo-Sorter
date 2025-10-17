@@ -81,3 +81,11 @@ Make sure this folder exists or is writable.
    flask run
    ```
 Then visit http://127.0.0.1:5002/ in your browser.  
+
+
+## License
+
+This project is shared under a custom open-use license.
+You may view, study, and modify the code for personal or educational purposes.
+Redistribution or commercial use requires written permission from the author.
+All software is provided “as is,” without warranty of any kind.
